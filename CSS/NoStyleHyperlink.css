@@ -1,0 +1,17 @@
+
+.no-style-link {
+    text-decoration: none; 
+    color: inherit; 
+    cursor: pointer; 
+    display: inline-flex; 
+    align-items: center; 
+}
+
+
+.no-style-link img {
+    vertical-align: middle; 
+}
+
+.no-style-link:hover {
+    opacity: 0.8; 
+}
