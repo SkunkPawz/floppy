@@ -15,3 +15,21 @@
 .no-style-link:hover {
     opacity: 0.8; 
 }
+
+.shaking-text {
+		font-size: clamp(1.2rem, 5vw, 2rem);
+		font-weight: bold;
+		line-height: 1.5;
+		color: red;
+		text-align: center;
+		word-break: break-word;
+	}
+
+	.shaking-text span {
+		display: inline-block;
+		animation: shake 0.5s infinite;
+	}
+
+	.shaking-text span:nth-child(n) {
+		animation-delay: calc((var(--i) - 1) * 0.1s);
+	}
