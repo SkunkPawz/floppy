@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MySpage</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: white;
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 40px 40px;
+      background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+      overflow-y: scroll;
+    }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: #222;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: purple;
+            border-radius: 6px;
+        }
+        @media (max-width: 1000px) {
+            .container { width: 98vw; }
+            .main-content { flex-direction: column; }
+            .left-col, .right-col { width: 100%; }
+        }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto 40px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #6f00ff;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(90deg, #330033, #220022, #330033);
+      color: #cc66ff;
+      font-size: 28px;
+      padding: 15px;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px #000;
+      border: 2px dashed #9900cc;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px #6f00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    .top-banner {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    img.divider {
+      width: 100%;
+      margin: 30px 0;
+    }
+
+    .profile {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .profile-pic img {
+      width: 200px;
+      border: 4px solid #cc00cc;
+    }
+
+    .bio {
+      flex: 1;
+    }
+
+    section {
+      background: #111;
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #444;
+    }
+
+    h2 {
+      color: #cc66ff;
+      border-bottom: 1px dashed #cc66ff;
+      padding-bottom: 5px;
+    }
+
+    .socials a {
+      display: inline-block;
+      margin: 8px 15px 8px 0;
+      color: #cc66ff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .socials a:hover {
+      text-decoration: underline;
+    }
+
+    .badge {
+      margin-top: 15px;
+      display: block;
+      max-width: 100%;
+    }
+
+    .blinkies {
+      text-align: center;
+      margin: 20px auto;
+    }
+
+    .blinkies img {
+      margin: 5px;
+      height: 31px;
+      width: 200px;
+      image-rendering: pixelated;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 40px;
+    }
+
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTOPLAY MUSIC -->
+  <audio src="Audio/epona.mp3" autoplay loop hidden></audio>
+
+  <!-- Top Pixel Doll Banner -->
+  <img class="top-banner" src="https://pixelsafari.neocities.org/dividers/misc/dollz.gif" alt="Pixel Doll Header">
+
+  <div class="container">
+    <header>
+      <img src="https://img1.picmix.com/output/stamp/normal/7/6/1/6/2116167_02715.png" alt="glitter heart">
+      Rowan's Pageee
+      <img src="https://img1.picmix.com/output/stamp/normal/7/6/1/6/2116167_02715.png" alt="glitter heart">
+    </header>
+
+    <div class="profile">
+      <div class="profile-pic">
+        <img src="https://img1.picmix.com/output/pic/normal/6/2/6/0/12530626_d6ec6.gif" alt="Profile Picture">
+      </div>
+      <div class="bio">
+        <p><strong>Name:</strong> Rowan </p>
+        <p><strong>Status:</strong> Barking Online</p>
+        <p><strong>Location:</strong> Denmark :3c </p>
+        <p><strong>Pronouns:</strong> She/Her They/Them Pup/Pups etc. </p>
+      
+        <p><strong>About Me:</strong> <br>Southern (SC, USA) TGirl who packed up and moved everything to Denmark 4 love :3 <br> Lv. 23 Professional Online Loser 💀🖤 </p>
+      </div>
+    </div>
+
+    <img class="divider" src="https://pixelsafari.neocities.org/dividers/glitterpurple.gif" alt="glitter divider">
+
+    <section>
+      <h2>FAV MUSIC EVERRR</h2>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+        <iframe src="https://www.youtube.com/embed/OZ04Q6nfLMg"
+                style="position:absolute; top:0; left:0; width:100%; height:100%;"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <img class="divider" src="https://pixelsafari.neocities.org/dividers/glitterpurple.gif" alt="glitter divider">
+
+    <section class="socials">
+      <h2>Find Me Elsewhere</h2>
+      <a href="https://ratgirl-deluxe.tumblr.com/" target="_blank">My Awesome Wife</a>
+      <a href="https://twitter.com/pawbotomized" target="_blank">Twitter</a>
+      <a href="https://instagram.com/neoncryptyd" target="_blank">Instagram</a>
+      <a href="https://discordapp.com/users/user_id" target="_blank">Discord</a>
+      <a href="https://t.me/SkunkPaws" target="_blank">Telegram</a>
+      <a href="https://www.tiktok.com/@pawbotomized" target="_blank">Tiktok</a>
+      <a href="https://steamcommunity.com/id/Hazardouspet/" target="_blank">Steam</a>
+      <a href="https://www.tumblr.com/pawbotomized" target="_blank">Tumblr</a>
+      <a href="Link" target="_blank">My Other Page</a>
+      <img class="badge" src="https://img1.picmix.com/output/pic/normal/3/0/2/4/12744203_8363b.gif" alt="Internet Girl Badge">
+    </section>
+
+    <img class="divider" src="https://pixelsafari.neocities.org/dividers/glitterpurple.gif" alt="glitter divider">
+
+    <!-- BLINKIES SECTION -->
+    <div class="blinkies">
+      <img src="https://blinkies.cafe/b/display/0069-alien.gif" alt="Alien Blinkie">
+      <img src="https://blinkies.cafe/b/display/0031-dogpaw.gif" alt="Dog Paw Blinkie">
+      <img src="https://blinkies.cafe/b/display/0114-tbh.gif" alt="tbh Blinkie">
+      <img src="Images/Trans.gif" alt="Trans Pride Blinkie">
+    </div>
+
+    <section class="comments">
+      <h2>Guestbook</h2>
+      <div id="HCB_comment_box">Loading comments...</div>
+      <link rel="stylesheet" href="https://www.htmlcommentbox.com/static/skins/default/skin.css" />
+      <script id="hcb">
+        if (!window.hcb_user) hcb_user = {};
+        (function() {
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src = "https://www.htmlcommentbox.com/jread?page=rowanspagecornerthing&mod=%241%24wq1rdBcg%24g52SP0nZbHHc7EJ2eyXRi1";
+          s.async = true;
+          document.head.appendChild(s);
+        })();
+      </script>
+    </section>
+
+    <div class="footer">
+      Made with Love & HTML • © 2002–2025
+    </div>
+  </div>
+
+  <!-- Sparkle Cursor (doesnt work) -->
+  <script src="https://www.cursors-4u.com/cursor.js"></script>
+  <script>
+    Cursors4U.init("https://www.cursors-4u.com/sparklies/sparkles.js");
+  </script>
+
+
+</body>
+</html>
+
+
