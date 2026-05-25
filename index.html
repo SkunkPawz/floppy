@@ -42,15 +42,10 @@
 	<script>
 		const bgAudio = document.getElementById('bg-audio');
 		
-		// Function to start audio on first interaction
-		const startAudio = () => {
-			bgAudio.play().catch(error => console.log("Autoplay blocked until interaction."));
-			// Remove the listener so it doesn't trigger on every click
-			document.removeEventListener('click', startAudio);
-		};
-
-		// Start audio on first click
-		document.addEventListener('click', startAudio);
+		// Start audio after 0.5 seconds
+		setTimeout(() => {
+			bgAudio.play().catch(error => console.log("Autoplay blocked or error occurred."));
+		}, 500); // 500 milliseconds = 0.5 seconds
 
 		// Navigate to Myspace when audio ends
 		if (bgAudio) {
