@@ -30,29 +30,29 @@
 			width: 120px;
 			height: auto;
 			z-index: 10;
+			cursor: pointer;
 		}
 	</style>
 </head>
 <body>
-	<audio id="bg-audio" src="Audio/SpookyMansion.mp3" autoplay></audio>
+	<audio id="bg-audio" src="Audio/SpookyMansion.mp3"></audio>
 	<div class="background-container">
-		<a href="myspace/Myspace.html" target="_blank"><img class="corner-spider" src="Images/Spider.png" alt="Spider"></a>
+		<img class="corner-spider" id="spider-img" src="Images/Spider.png" alt="Spider">
 		<img src="Images/spookymansion.jpg" alt="Spooky Mansion">
 	</div>
 	<script>
 		const bgAudio = document.getElementById('bg-audio');
+		const spiderImg = document.getElementById('spider-img');
 		
-		// Start audio after 0.5 seconds
-		setTimeout(() => {
+		// Play audio and redirect when spider is clicked
+		spiderImg.addEventListener('click', () => {
 			bgAudio.play().catch(error => console.log("Autoplay blocked or error occurred."));
-		}, 500); // 500 milliseconds = 0.5 seconds
+		});
 
 		// Navigate to Myspace when audio ends
-		if (bgAudio) {
-			bgAudio.addEventListener('ended', () => {
-				window.location.href = 'myspace/Myspace.html';
-			});
-		}
+		bgAudio.addEventListener('ended', () => {
+			window.location.href = 'myspace/Myspace.html';
+		});
 	</script>
 </body>
 </html>
