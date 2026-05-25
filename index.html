@@ -34,13 +34,25 @@
 	</style>
 </head>
 <body>
-	<audio id="bg-audio" src="Audio/SpookyMansion.mp3" autoplay controls></audio>
+	<audio id="bg-audio" src="Audio/SpookyMansion.mp3" autoplay></audio>
 	<div class="background-container">
 		<a href="myspace/Myspace.html" target="_blank"><img class="corner-spider" src="Images/Spider.png" alt="Spider"></a>
 		<img src="Images/spookymansion.jpg" alt="Spooky Mansion">
 	</div>
 	<script>
 		const bgAudio = document.getElementById('bg-audio');
+		
+		// Function to start audio on first interaction
+		const startAudio = () => {
+			bgAudio.play().catch(error => console.log("Autoplay blocked until interaction."));
+			// Remove the listener so it doesn't trigger on every click
+			document.removeEventListener('click', startAudio);
+		};
+
+		// Start audio on first click
+		document.addEventListener('click', startAudio);
+
+		// Navigate to Myspace when audio ends
 		if (bgAudio) {
 			bgAudio.addEventListener('ended', () => {
 				window.location.href = 'myspace/Myspace.html';
