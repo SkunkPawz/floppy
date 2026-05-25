@@ -35,7 +35,7 @@
 	</style>
 </head>
 <body>
-	<audio id="bg-audio" src="Audio/SpookyMansion.mp3"></audio>
+	<audio id="bg-audio" src="Audio/SpookyMansion.mp3" preload="auto" autoplay></audio>
 	<div class="background-container">
 		<img class="corner-spider" id="spider-img" src="Images/Spider.png" alt="Spider">
 		<img src="Images/spookymansion.jpg" alt="Spooky Mansion">
@@ -44,9 +44,14 @@
 		const bgAudio = document.getElementById('bg-audio');
 		const spiderImg = document.getElementById('spider-img');
 		
-		// Play audio and redirect when spider is clicked
+		// Try to autoplay audio in the background
+		document.addEventListener('DOMContentLoaded', () => {
+			bgAudio.play().catch(error => console.log('Autoplay prevented or error:', error));
+		});
+
+		// Redirect when spider is clicked
 		spiderImg.addEventListener('click', () => {
-			bgAudio.play().catch(error => console.log("Autoplay blocked or error occurred."));
+			window.location.href = 'myspace/Myspace.html';
 		});
 
 		// Navigate to Myspace when audio ends
@@ -56,3 +61,4 @@
 	</script>
 </body>
 </html>
+
