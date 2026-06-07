@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>MySpage</title>
+  <link rel="icon" href="Images/icon.ico" type="image/x-icon">
   <style>
     body {
       margin: 0;
@@ -163,6 +164,52 @@
     iframe {
       border: none;
     }
+
+    #ad-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    #ad-modal {
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+      background: #111;
+      border: 4px solid #cc0000;
+      padding: 12px;
+      box-shadow: 0 0 30px #000;
+      text-align: center;
+    }
+
+    #ad-modal img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+    }
+
+    #ad-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #cc0000;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      font-size: 18px;
+      line-height: 26px;
+      cursor: pointer;
+      text-align: center;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -202,9 +249,9 @@
       </h2>
       <a href="https://www.tumblr.com/hazardpet" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/archive/4/43/20140221000724%21Tumblr.svg" alt="Tumblr"></a>
       <a href="https://twitter.com/pawbotomized" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Twitter_logo_%282006-2012%29.png" alt="Twitter"></a> 
-      <a href="https://c.tenor.com/pD3apzOfUOMAAAAd/tenor.gif" target="_blank"> <img src="https://static.wikia.nocookie.net/logopedia/images/3/37/Instagram_Icon.png/revision/latest?cb=20130503192003" alt="Instagram"></a>
+      <a href="https://instagram.com/neoncryptyd" target="_blank"> <img src="https://static.wikia.nocookie.net/logopedia/images/3/37/Instagram_Icon.png/revision/latest?cb=20130503192003" alt="Instagram"></a>
       <a href="https://discordapp.com/users/416362140144893953" target="_blank"> <img src="https://static.wikia.nocookie.net/logopedia/images/0/09/Discord_Former_Icon.svg/revision/latest?cb=20201109094951" alt="Discord"></a>
-      <a href="https://t.me/HazardPet" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></a>
+      <a href="https://t.me/SkunkPaws" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></a>
       <a href="https://steamcommunity.com/id/Hazardouspet/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam"></a>
       <a href="https://backloggd.com/u/hazardpet" target="_blank"> <img src="https://cdn-1.webcatalog.io/catalog/backloggd/backloggd-icon.png?v=1722424670368" alt="Backloggd"></a>
        <a href="https://letterboxd.com/hazardpet/" target="_blank"> <img src="https://a.ltrbxd.com/logos/letterboxd-mac-icon.png" alt="Letterboxd"></a>
@@ -256,6 +303,95 @@
     Cursors4U.init("https://www.cursors-4u.com/sparklies/sparkles.js");
   </script>
 
+  <div id="ad-overlay" aria-hidden="true">
+    <div id="ad-modal">
+      <button id="ad-close" type="button" aria-label="Close advertisement">×</button>
+      <img id="ad-image" src="../Images/advertisement.gif" alt="Advertisement">
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const adOverlay = document.getElementById('ad-overlay');
+      const adClose = document.getElementById('ad-close');
+      const adImage = document.getElementById('ad-image');
+      const redirectUrl = '../Dan/dan.html';
+      let closeCount = 0;
+      let showTimeout = null;
+      let reappearTimeout = null;
+      let finalAutoCloseTimeout = null;
+      let inputDetected = false;
+
+      function showAd() {
+        if (closeCount >= 3) {
+          return;
+        }
+        inputDetected = false;
+        adOverlay.style.display = 'flex';
+        adOverlay.setAttribute('aria-hidden', 'false');
+
+        if (closeCount === 2) {
+          startFinalAutoClose();
+          attachInputListener();
+        }
+      }
+
+      function hideAd() {
+        adOverlay.style.display = 'none';
+        adOverlay.setAttribute('aria-hidden', 'true');
+        clearTimeout(finalAutoCloseTimeout);
+        removeInputListener();
+      }
+
+      function scheduleShow(delay) {
+        clearTimeout(showTimeout);
+        showTimeout = setTimeout(showAd, delay);
+      }
+
+      function startFinalAutoClose() {
+        clearTimeout(finalAutoCloseTimeout);
+        finalAutoCloseTimeout = setTimeout(function() {
+          if (!inputDetected) {
+            hideAd();
+          }
+        }, 2000);
+      }
+
+      function attachInputListener() {
+        document.addEventListener('mousemove', onUserInput, { once: true });
+        document.addEventListener('keydown', onUserInput, { once: true });
+        document.addEventListener('mousedown', onUserInput, { once: true });
+      }
+
+      function removeInputListener() {
+        document.removeEventListener('mousemove', onUserInput, { once: true });
+        document.removeEventListener('keydown', onUserInput, { once: true });
+        document.removeEventListener('mousedown', onUserInput, { once: true });
+      }
+
+      function onUserInput() {
+        inputDetected = true;
+        clearTimeout(finalAutoCloseTimeout);
+      }
+
+      adClose.addEventListener('click', function() {
+        closeCount += 1;
+        if (closeCount >= 3) {
+          window.location.href = redirectUrl;
+          return;
+        }
+        hideAd();
+        clearTimeout(reappearTimeout);
+        reappearTimeout = setTimeout(showAd, 1000);
+      });
+
+      adImage.addEventListener('click', function() {
+        window.location.href = redirectUrl;
+      });
+
+      scheduleShow(12000);
+    })();
+  </script>
 
 </body>
 </html>
