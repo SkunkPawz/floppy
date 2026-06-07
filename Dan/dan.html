@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angry man wants to fight</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: white url('Images/background.gif') center/cover no-repeat fixed;
+        }
+
+        .image-container {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .image-container:hover {
+            transform: scale(1.1);
+        }
+
+        .scared {
+            width: 250px !important;
+            height: 250px !important;
+            z-index: 1000 !important;
+            filter: drop-shadow(0 0 20px #ff0000) brightness(1.2) !important;
+        }
+
+        @keyframes scaremovement {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+            75% { transform: rotate(-8deg); }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(var(--x1, 100px), var(--y1, 100px));
+            }
+            50% {
+                transform: translate(var(--x2, -100px), var(--y2, 50px));
+            }
+            75% {
+                transform: translate(var(--x3, 80px), var(--y3, -80px));
+            }
+        }
+
+        .floating {
+            animation: float linear infinite;
+        }
+
+        #playButton {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 30px 60px;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border: 4px solid #ffff00;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        #playButton:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        #playButton:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <button id="playButton">click me</button>
+    
+    <audio id="bgAudio" loop>
+        <source src="Audio/thehallway.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound">
+        <source src="Audio/hi.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        const images = [
+            'Bananaman.webp',
+            'BoatOverThere.webp',
+            'Confession.webp',
+            'Dan_staring_hotel.webp',
+            'download.jpg',
+            'download89.jpg',
+            'Do_Priests%3F.webp',
+            'Drivingyoutoanundisclosedlocation.webp',
+            'Eddiebalcony.webp',
+            'Ernest_McDermot.webp',
+            'Ernest_McDermot_happy.webp',
+            'Gentlemelon.webp',
+            'Green_Goober_on_call.webp',
+            'Homie_Melon.webp',
+            'Icing_Son.webp',
+            'Ileftheratthebottomofthestairs.webp',
+            'images (1).jpg',
+            'images (2).jpg',
+            'images (3).jpg',
+            'images (4).jpg',
+            'images.jpg',
+            'Image_2025-04-12_024349442.webp',
+            'image_2026-06-07_06-22-04.png',
+            'Mad_at_watermelon.webp',
+            'Pch.webp',
+            'photo_10_2026-06-07_06-17-05.jpg',
+            'photo_10_2026-06-07_06-38-26.jpg',
+            'photo_11_2026-06-07_06-17-05.jpg',
+            'photo_11_2026-06-07_06-38-26.jpg',
+            'photo_12_2026-06-07_06-17-05.jpg',
+            'photo_12_2026-06-07_06-38-26.jpg',
+            'photo_13_2026-06-07_06-17-05.jpg',
+            'photo_13_2026-06-07_06-38-26.jpg',
+            'photo_14_2026-06-07_06-17-05.jpg',
+            'photo_14_2026-06-07_06-38-26.jpg',
+            'photo_15_2026-06-07_06-17-05.jpg',
+            'photo_15_2026-06-07_06-38-26.jpg',
+            'photo_16_2026-06-07_06-17-05.jpg',
+            'photo_16_2026-06-07_06-38-26.jpg',
+            'photo_17_2026-06-07_06-17-05.jpg',
+            'photo_17_2026-06-07_06-38-26.jpg',
+            'photo_18_2026-06-07_06-17-05.jpg',
+            'photo_18_2026-06-07_06-38-26.jpg',
+            'photo_19_2026-06-07_06-17-05.jpg',
+            'photo_19_2026-06-07_06-38-26.jpg',
+            'photo_1_2026-06-07_06-17-05.jpg',
+            'photo_1_2026-06-07_06-38-25.jpg',
+            'photo_20_2026-06-07_06-17-05.jpg',
+            'photo_20_2026-06-07_06-38-26.jpg',
+            'photo_2_2026-06-07_06-17-05.jpg',
+            'photo_2_2026-06-07_06-38-25.jpg',
+            'photo_3_2026-06-07_06-17-05.jpg',
+            'photo_3_2026-06-07_06-38-25.jpg',
+            'photo_4_2026-06-07_06-17-05.jpg',
+            'photo_4_2026-06-07_06-38-25.jpg',
+            'photo_5_2026-06-07_06-17-05.jpg',
+            'photo_5_2026-06-07_06-38-25.jpg',
+            'photo_6_2026-06-07_06-17-05.jpg',
+            'photo_6_2026-06-07_06-38-25.jpg',
+            'photo_7_2026-06-07_06-17-05.jpg',
+            'photo_7_2026-06-07_06-38-25.jpg',
+            'photo_8_2026-06-07_06-17-05.jpg',
+            'photo_8_2026-06-07_06-38-25.jpg',
+            'photo_9_2026-06-07_06-17-05.jpg',
+            'photo_9_2026-06-07_06-38-25.jpg',
+            'Screenshot_2026-03-01_9.50.08_PM.webp',
+            'Screenshot_2026-03-11_at_12.28.36_PM.webp',
+            'Sharon_Rosenthal.webp',
+            'Sharon_Rosenthal_with_Trump.webp',
+            'Son_Cumber_-_Cumber_Son.webp',
+            'Son_LOAF_IS_BACK212121.webp',
+            'Son_Wires_-_Wire_Son.webp',
+            'Tapeman.webp',
+            'Weareallconstantlygettingscammed.webp',
+            'Whatitwasliketogotojail.webp',
+            'Whymyconfessionmeantnothing.webp'
+        ];
+
+        class BouncingImage {
+            constructor(src) {
+                this.img = document.createElement('img');
+                this.img.src = `Images/${src}`;
+                this.img.className = 'image-container';
+                
+                this.width = 120;
+                this.height = 120;
+                this.x = Math.random() * (window.innerWidth - this.width);
+                this.y = Math.random() * (window.innerHeight - this.height);
+                this.vx = (Math.random() - 0.5) * 8; // velocity x
+                this.vy = (Math.random() - 0.5) * 8; // velocity y
+                
+                this.img.style.left = this.x + 'px';
+                this.img.style.top = this.y + 'px';
+                
+                this.img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    // Play click sound
+                    const clickAudio = document.getElementById('clickSound');
+                    clickAudio.currentTime = 0;
+                    clickAudio.play().catch(err => console.log('Click sound play failed:', err));
+                    
+                    if (!this.img.classList.contains('scared')) {
+                        this.img.classList.add('scared');
+                        this.img.style.animation = `scaremovement 0.2s infinite`;
+                        
+                        setTimeout(() => {
+                            this.img.classList.remove('scared');
+                            this.img.style.animation = 'none';
+                        }, 2000);
+                    }
+                });
+                
+                document.body.appendChild(this.img);
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Bounce off right/left walls
+                if (this.x + this.width >= window.innerWidth || this.x <= 0) {
+                    this.vx *= -1;
+                    this.x = Math.max(0, Math.min(this.x, window.innerWidth - this.width));
+                }
+                
+                // Bounce off bottom/top walls
+                if (this.y + this.height >= window.innerHeight || this.y <= 0) {
+                    this.vy *= -1;
+                    this.y = Math.max(0, Math.min(this.y, window.innerHeight - this.height));
+                }
+                
+                this.img.style.left = this.x + 'px';
+                this.img.style.top = this.y + 'px';
+            }
+        }
+        
+        const bouncingImages = images.map(src => new BouncingImage(src));
+        
+        function animate() {
+            bouncingImages.forEach(obj => obj.update());
+            requestAnimationFrame(animate);
+        }
+        
+        // Play audio on button click
+        const playButton = document.getElementById('playButton');
+        playButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const audio = document.getElementById('bgAudio');
+            audio.play().catch(e => console.log('Audio play failed:', e));
+            playButton.style.display = 'none';
+        });
+        
+        animate();
+    </script>
+</body>
+</html>
